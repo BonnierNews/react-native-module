@@ -48,6 +48,7 @@ RCT_EXPORT_METHOD(removeListeners:(NSInteger)count) {
 
 RCT_EXPORT_METHOD(setUserNotificationsEnabled:(BOOL)enabled) {
     [UAirship push].userPushNotificationsEnabled = enabled;
+    [[UAirship push] updateRegistration];
 }
 
 RCT_REMAP_METHOD(isUserNotificationsEnabled,
@@ -270,6 +271,7 @@ RCT_EXPORT_METHOD(setForegroundPresentationOptions:(NSDictionary *)options) {
 
 RCT_EXPORT_METHOD(setQuietTimeEnabled:(BOOL)enabled) {
     [UAirship push].quietTimeEnabled = enabled;
+    [[UAirship push] updateRegistration];
 }
 
 RCT_REMAP_METHOD(isQuietTimeEnabled,

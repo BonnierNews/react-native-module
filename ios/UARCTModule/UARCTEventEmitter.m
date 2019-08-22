@@ -72,6 +72,7 @@ static UARCTEventEmitter *sharedEventEmitter_;
 - (void)addListener:(NSString *)eventName {
     @synchronized(self.knownListeners) {
         self.listenerCount++;
+        [self.knownListeners addObject:eventName];
 
         for (id event in [self.pendingEvents copy]) {
             if ([event[UARCTEventNameKey] isEqualToString:eventName]) {
@@ -79,8 +80,6 @@ static UARCTEventEmitter *sharedEventEmitter_;
                 [self.pendingEvents removeObject:event];
             }
         }
-
-        [self.knownListeners addObject:eventName];
     }
 }
 

@@ -32,6 +32,11 @@ static BOOL disabled = NO;
     [UAirship push].registrationDelegate = [UARCTEventEmitter shared];
     [UAirship inbox].delegate = [UARCTMessageCenter shared];
 
+    // Remove default action to open url in external browser
+    [[UAirship shared].actionRegistry updatePredicate:^BOOL(UAActionArguments *args) {
+        return NO;
+    } forEntryWithName:kUAOpenExternalURLActionDefaultRegistryName];
+
     // Register custom deep link action
     UARCTDeepLinkAction *dle = [[UARCTDeepLinkAction alloc] init];
     [[UAirship shared].actionRegistry updateAction:dle forEntryWithName:kUADeepLinkActionDefaultRegistryName];
